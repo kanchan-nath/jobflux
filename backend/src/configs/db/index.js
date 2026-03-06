@@ -1,17 +1,17 @@
 import mongoose from "mongoose"
+import { logger } from "../../loggers/logger.js"
 
 const connectDB = async ()=>{
     try {
         const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URI}/${process.env.MONGODB_NAME}`)
         
-        console.log(`MongoDB connected successfully:\nDB Name: ${connectionInstance.connection.name}\nDB Host: ${connectionInstance.connection.host}\n`)
+        logger.info(`MongoDB connected successfully:\nDB Name: ${connectionInstance.connection.name}`)
         
     } catch (error) {
-        console.log(`MongoDB connection failed: ${error}`)
+        logger.info(`MongoDB connection failed: ${error}`)
     }
     
 }
 
-connectDB()
 
 export {connectDB}
