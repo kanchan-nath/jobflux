@@ -1,0 +1,341 @@
+/* Inherits all base styles from Login.css */
+/* Signup-specific additions */
+
+/* Role selector */
+.role-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.role-option {
+  position: relative;
+}
+
+.role-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.role-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.75rem;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.role-label:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-elevated);
+}
+
+.role-option input:checked + .role-label {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+  box-shadow: 0 0 0 3px rgba(0, 200, 150, 0.08);
+}
+
+.role-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.role-name {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.role-desc {
+  font-size: 0.725rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.role-option input:checked + .role-label .role-name {
+  color: var(--accent);
+}
+
+/* Two-column row */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.875rem;
+}
+
+/* Password strength */
+.password-strength {
+  margin-top: 0.375rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.strength-bars {
+  display: flex;
+  gap: 4px;
+}
+
+.strength-bar {
+  flex: 1;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--border);
+  transition: background 0.3s ease;
+}
+
+.strength-bar.filled-weak   { background: #ff5c5c; }
+.strength-bar.filled-fair   { background: #ffa03c; }
+.strength-bar.filled-good   { background: #f0d000; }
+.strength-bar.filled-strong { background: var(--accent); }
+
+.strength-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.strength-label.weak   { color: #ff5c5c; }
+.strength-label.fair   { color: #ffa03c; }
+.strength-label.good   { color: #f0d000; }
+.strength-label.strong { color: var(--accent); }
+
+/* OTP step */
+.otp-step {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.otp-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 1rem 1.125rem;
+  background: var(--accent-glow);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+}
+
+.otp-info-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.otp-info-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.otp-info-email {
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-display);
+}
+
+.otp-inputs {
+  display: flex;
+  gap: 0.625rem;
+  justify-content: center;
+}
+
+.otp-input {
+  width: 52px;
+  height: 58px;
+  text-align: center;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  outline: none;
+  transition: var(--transition);
+  caret-color: var(--accent);
+}
+
+.otp-input:focus {
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+  box-shadow: 0 0 0 3px rgba(0, 200, 150, 0.1);
+}
+
+.otp-input.filled {
+  border-color: var(--border-accent);
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+
+.otp-input.error {
+  border-color: #ff5c5c;
+  animation: shake 0.35s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.otp-resend {
+  text-align: center;
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+}
+
+.otp-resend-btn {
+  color: var(--accent);
+  font-weight: 600;
+  font-family: var(--font-display);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 0.825rem;
+  padding: 0;
+  transition: var(--transition);
+}
+
+.otp-resend-btn:hover { text-decoration: underline; }
+.otp-resend-btn:disabled { color: var(--text-muted); cursor: default; text-decoration: none; }
+
+.otp-timer {
+  color: var(--text-muted);
+}
+
+/* Step progress */
+.auth-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 2rem;
+}
+
+.auth-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  flex: 1;
+}
+
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  border: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: var(--text-muted);
+  transition: var(--transition);
+  position: relative;
+  z-index: 1;
+}
+
+.auth-step.active .step-circle {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--text-inverse);
+  box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.15);
+}
+
+.auth-step.done .step-circle {
+  background: var(--accent-glow);
+  border-color: var(--border-accent);
+  color: var(--accent);
+}
+
+.step-label {
+  font-size: 0.7rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.auth-step.active .step-label {
+  color: var(--accent);
+}
+
+.auth-step.done .step-label {
+  color: var(--text-secondary);
+}
+
+.step-connector {
+  flex: 1;
+  height: 1.5px;
+  background: var(--border);
+  margin-bottom: 1.15rem;
+  transition: background 0.4s ease;
+}
+
+.step-connector.done {
+  background: var(--accent);
+}
+
+/* Terms */
+.terms-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  cursor: pointer;
+}
+
+.terms-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.terms-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.terms-text a {
+  color: var(--accent);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.terms-text a:hover { text-decoration: underline; }
+
+/* Back step button */
+.back-step-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  font-family: var(--font-display);
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: var(--transition);
+  margin-bottom: 0.25rem;
+}
+
+.back-step-btn:hover { color: var(--text-primary); }

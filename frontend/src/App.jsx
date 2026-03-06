@@ -7,7 +7,8 @@ import Jobs from './pages/Jobs/Jobs';
 import JobDetails from './pages/JobDetails/JobDetails';
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
-
+import Login from "./pages/Login/Login"
+import Signup from "./pages/Signup/Signup"
 // Scroll to top on route change
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -17,11 +18,14 @@ function ScrollToTop() {
   return null;
 }
 
+
 function AppLayout() {
+  let location = useLocation()
+  const hideNavbarRoutes = ["/login", "/signup"]
   return (
     <>
       <ScrollToTop />
-      <Navbar />
+      {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
       <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -29,6 +33,9 @@ function AppLayout() {
           <Route path="/jobs/:id" element={<JobDetails />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
           <Route path="*" element={
             <div style={{
               minHeight: '80vh',

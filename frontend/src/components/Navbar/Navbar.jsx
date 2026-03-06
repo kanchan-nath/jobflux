@@ -73,7 +73,14 @@ export default function Navbar() {
           </Link>
         ))}
         <div className="mobile-menu-actions">
+          <Link to="/login" >
+          
           <button className="btn-login">Log In</button>
+          </Link>
+          <Link to="/signup" >
+
+            <button className="btn-login">Sign Up</button>
+          </Link>
           <button className="btn-post-job">Post a Job</button>
         </div>
       </div>
