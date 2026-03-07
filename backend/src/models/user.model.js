@@ -21,7 +21,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum:["Job Seeker", "Employer"],
         required: true
+    },
+    password:{
+        type: String,
+        required: true,
     }
 }, {timestamps: true})
 
-export const UserSchema = mongoose.model("UserSchema",userSchema )
+export const User = mongoose.model("User",userSchema )
