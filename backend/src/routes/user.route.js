@@ -1,10 +1,10 @@
 import { 
-    signUpUser
-} from "../controllers/user.controller";
+    signUpUserEmailAndPassword
+} from "../controllers/user.controller.js";
 import {Router} from "express"
 
 const router = Router()
 
-router.route("/signup").post( signUpUser)
+router.route("/signup/email-password").post(signUpUserEmailAndPassword)
 
 export default router

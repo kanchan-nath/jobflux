@@ -89,15 +89,40 @@ export default function Signup() {
   };
 
   const handleStep0 = async (e) => {
-    e.preventDefault();
-    const errs = validateStep0();
+    e.preventDefault()
+    const errs = validateStep0()
     if (Object.keys(errs).length) { setErrors(errs); return; }
-    setLoading(true);
-    await new Promise(r => setTimeout(r, 900)); // simulate API
-    setLoading(false);
-    setStep(1);
-  };
+    setLoading(true)
 
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/users/signup/email-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({       // ← send the data
+          email: form.email,
+          password: form.password
+        })
+      })
+
+      const data = await response.json()  // ← read the response
+      console.log(data)                   // ← check what backend returns
+
+      if (response.ok) {
+        // ✅ save session_id for next steps
+        setSessionId(data.session_id)
+        setStep(1)                        // ← only move if success
+      } else {
+        setErrors({ general: data.message })  // show backend error
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+
+    setLoading(false)
+  }
   // ===== OTP HANDLERS =====
   const handleOtpChange = (e, idx) => {
     const val = e.target.value.replace(/\D/g, '').slice(-1);
