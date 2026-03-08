@@ -31,14 +31,15 @@ import {ApiResponse} from "../utils/ApiResponse.js"
 const signUpUserEmailAndPassword = asyncHandler(async(req, res)=>{
     const {email, password} = req.body
     logger.info(req.body)
+    logger.ingo(email, password)
     if(!email || !password){
         throw new ApiError(422, "Email and Password are required")
     }
 
-    const emailPasswordResponse = await User.create({
-        email,
-        password
-    })
+    // const emailPasswordResponse = await User.create({
+    //     email,
+    //     password
+    // })
 
     logger.info(emailPasswordResponse)
     return res
