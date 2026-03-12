@@ -108,6 +108,7 @@ export default function Signup() {
 
       const data = await response.json()  // ← read the response
       console.log(data)                   // ← check what backend returns
+      console.log(response)
 
       if (response.ok) {
         // ✅ save session_id for next steps

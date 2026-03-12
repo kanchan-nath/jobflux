@@ -1,6 +1,7 @@
 import express, {Router} from "express"
 import cors from "cors"
 import client from 'prom-client';
+import { logger } from "./src/loggers/logger.js";
 
 const app = express()
 
@@ -19,15 +20,20 @@ app.get("/metrics", async (req, res) => {
 
 
 app.use(cors())
-app.use(express.json({ limit: "1600kb" }))
+app.use(express.json())
 app.use(express.urlencoded({extended:true, limit: "1600kb"}))
 
-app.get("/", (req, res) => {
-    res.send("Server working");
-});
+// app.get("/", (req, res) => {
+//     res.send("Server working Pro");
+    
+// });
+
+// app.get("/helloji", (req, res)=>{
+//     res.send("Hello JI")
+// })
 
 import userRouter from "./src/routes/user.route.js"
 
-app.use(`/api/v1/users`, userRouter)
+app.use("/api/v1/users", userRouter)
 
 export {app}
