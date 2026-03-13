@@ -107,22 +107,22 @@ export default function Signup() {
       })
 
       const data = await response.json()  // ← read the response
-      console.log(data)                   // ← check what backend returns
+      // console.log(data)                   // ← check what backend returns
       console.log(response)
 
-      if (response.ok) {
-        // ✅ save session_id for next steps
-        setSessionId(data.session_id)
-        setStep(1)                        // ← only move if success
-      } else {
-        setErrors({ general: data.message })  // show backend error
-      }
+      setStep(1)                        // ← only move if success
+      // if (response.ok) {
+      //   // ✅ save session_id for next steps
+      //   // setSessionId(data.session_id)
+      // } else {
+      //   setErrors({ general: data.message })  // show backend error
+      // }
 
     } catch (error) {
       console.log(error)
+      setLoading(false)
     }
 
-    setLoading(false)
   }
   // ===== OTP HANDLERS =====
   const handleOtpChange = (e, idx) => {
@@ -155,9 +155,11 @@ export default function Signup() {
     e.preventDefault();
     const code = otp.join('');
     if (code.length < 6) { setOtpError(true); return; }
-    setLoading(true);
-    await new Promise(r => setTimeout(r, 900));
-    setLoading(false);
+
+    
+    // setLoading(true);
+    // await new Promise(r => setTimeout(r, 900));
+    // setLoading(false);
     // Accept any 6-digit code for demo
     setStep(2);
   };
