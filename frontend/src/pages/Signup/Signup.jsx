@@ -155,13 +155,31 @@ export default function Signup() {
     e.preventDefault();
     const code = otp.join('');
     if (code.length < 6) { setOtpError(true); return; }
+    setLoading(true);
 
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/users/auth/verify-otp", {
+        method: "POST",
+        headers: "application/josn"
+
+      },
+    {
+      body:JOSN.stringify({
+        otp:form.otp
+      })      
+    })
+
+    console.log(response.json());
     
-    // setLoading(true);
+    setStep(2);
+    } catch (error) {
+      console.log(error);
+      setLoading(false)
+      
+    }
     // await new Promise(r => setTimeout(r, 900));
     // setLoading(false);
     // Accept any 6-digit code for demo
-    setStep(2);
   };
 
   const handleResend = () => {

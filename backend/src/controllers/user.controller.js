@@ -6,6 +6,8 @@ import {ApiError} from "../utils/ApiError.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import { otpQueue } from "../queues/OTP.queue.js";
 
+const genarateOTP = Math.floor(Math.random() * 1000000)
+
 const signUpUserEmailAndPassword = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
@@ -14,7 +16,6 @@ const signUpUserEmailAndPassword = asyncHandler(async (req, res) => {
         throw new ApiError(422, "Email and Password are required");
     }
 
-    const genarateOTP = Math.floor(Math.random() * 1000000)
 
     await otpQueue.add("sendOTP",
         {
@@ -29,8 +30,29 @@ const signUpUserEmailAndPassword = asyncHandler(async (req, res) => {
 });
 
 
+const verifyOTP = asyncHandler(async (req, res)=>{
+    const {otp} = req.body
+
+    if(!otp){
+        throw new ApiError(422, "OTP is required")
+    }
+
+    if(genarateOTP === otp){
+        await User.findByIdAndUpdate(req._id, {
+            enailVerified: true
+        },{
+            new: true
+        })
+    }
+
+    return res
+    .status(200)
+    .json(new ApiResponse(200, {}, ""))
+})
+
 
 export {
     signUpUserEmailAndPassword,
+    verifyOTP
     
 }
